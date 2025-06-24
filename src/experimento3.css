@@ -1,0 +1,78 @@
+.experimento3 .buffer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.experimento3 .buffer-cell {
+  border: 2px solid #4a5568;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #f7fafc;
+  border-radius: 5px;
+}
+
+.experimento3 .counters {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.experimento3 .counter {
+  text-align: center;
+}
+
+.experimento3 .counter .label {
+  display: block;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.experimento3 .counter .value {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2b6cb0;
+}
+
+.experimento3 .event-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.experimento3 .event {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+}
+
+.experimento3 .event.produtor {
+  background-color: #ebf8ff;
+  border-left: 4px solid #3182ce;
+}
+
+.experimento3 .event.consumidor {
+  background-color: #f0fff4;
+  border-left: 4px solid #38a169;
+}
+
+.experimento3 .event.sistema {
+  background-color: #fffaf0;
+  border-left: 4px solid #dd6b20;
+}
+
+.experimento3 .timestamp {
+  font-size: 0.8rem;
+  color: #718096;
+  margin-right: 10px;
+}

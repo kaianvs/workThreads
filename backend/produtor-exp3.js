@@ -1,0 +1,62 @@
+import { workerData, parentPort } from 'worker_threads';
+
+const { id, buffer, semaphores, bufferSize } = workerData;
+const bufferView = new Int32Array(buffer);
+const sharedBuffer = bufferView.subarray(0, bufferSize);
+const indices = bufferView.subarray(bufferSize);
+const sems = new Int32Array(semaphores);
+
+const SEM_EMPTY = 0;
+const SEM_FULL = 1;
+const SEM_MUTEX = 2;
+
+// Funções semáforos
+function down(semArray, index) {
+  let current;
+  do {
+    current = Atomics.load(semArray, index);
+    if (current <= 0) {
+      Atomics.wait(semArray, index, current);
+    }
+  } while (!Atomics.compareExchange(semArray, index, current, current - 1));
+}
+
+function up(semArray, index) {
+  const newValue = Atomics.add(semArray, index, 1);
+  Atomics.notify(semArray, index);
+  return newValue + 1;
+}
+
+async function produzir() {
+  while (true) {
+    const item = Math.floor(Math.random() * 1000);
+    
+    down(sems, SEM_EMPTY);
+    down(sems, SEM_MUTEX);
+
+    // Obter e atualizar inIndex atomicamente
+    const pos = Atomics.load(indices, 0);
+    Atomics.store(sharedBuffer, pos, item);
+    
+    // Atualizar inIndex (buffer circular)
+    const newInIndex = (pos + 1) % bufferSize;
+    Atomics.store(indices, 0, newInIndex);
+    
+    // Atualizar semFull
+    const newFull = up(sems, SEM_FULL);
+    
+    up(sems, SEM_MUTEX);
+
+    parentPort.postMessage({ 
+      tipo: 'producao', 
+      id, 
+      item,
+      pos,
+      full: newFull
+    });
+
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 100));
+  }
+}
+
+produzir();
