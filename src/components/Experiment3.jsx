@@ -56,12 +56,12 @@ const Experimento3 = () => {
   };
 
   return (
-    <div className="text-white font-sora">
-      <h2 className='text-center'>Experimento 3: 200 Threads (100 Produtores / 100 Consumidores) com Semáforos</h2>
+    <div className="h-full text-white font-sora pb-20 ">
+      <h2 className='text-center font-bold text-2xl pb-8'>Experimento 3: 200 Threads (100 Produtores / 100 Consumidores) com Semáforos</h2>
       
       
       
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center gap-10">
         <h3>Buffer Compartilhado (Tamanho: 10)</h3>
         <div className="grid grid-cols-5 gap-10">
           {buffer.map((item, index) => (
@@ -73,12 +73,12 @@ const Experimento3 = () => {
       </div>
 
       <div className='flex justify-center items-center'>
-        <button className="bg-lime-500 font-sora rounded-2xl w-50 pt-2 pb-2 cursor-pointer" onClick={iniciar} disabled={loading}>
+        <button className="bg-lime-500 font-sora rounded-2xl w-50 pt-2 pb-2 cursor-pointer mt-10" onClick={iniciar} disabled={loading}>
           {loading ? 'Executando...' : 'Iniciar Experimento'}
         </button>
       </div>
       
-      <div className="flex justify-center gap-6 mt-10">
+      <div className="flex justify-center gap-6 m-20">
         <div className="text-center bg-blue-700 p-3 rounded-2xl">
           <span className="block text-2xl text-green-500">Produzidos:</span>
           <span className="block text-lg font-bold">{counters.produzidos}</span>
@@ -89,15 +89,15 @@ const Experimento3 = () => {
         </div>
       </div>
       
-      <div className="event-log">
-        <h3>Log de Eventos (últimos 20)</h3>
-        <div className="event-container">
-          {eventos.slice(-20).map((evento, index) => (
-            <div key={index} className={`event ${evento.tipo}`}>
-              <span className="timestamp">
+      <div className="  flex flex-col max-h-240 overflow-y-scroll justify-center items-center m-6 p-6 border-2 rounded-2xl border-blue-700">
+        <h3 className='text-2xl mb-4'>Log de Eventos (últimos 20)</h3>
+        <div className="w-full flex flex-col gap-2 ">
+          {eventos.slice(-15).map((evento, index) => (
+            <div key={index} /*className={`event ${evento.tipo}`}*/ className='w-full bg-white border-blue-700 border-l-4 h-10 rounded-2xl p-2' >
+              <span className="text-1xl text-blue-700 mr-6">
                 {new Date(evento.timestamp).toLocaleTimeString()}:
               </span>
-              <span className="message">
+              <span className="text-black">
                 {evento.tipo === 'produtor' && `Produtor ${evento.id} ${evento.mensagem}`}
                 {evento.tipo === 'consumidor' && `Consumidor ${evento.id} ${evento.mensagem}`}
                 {evento.tipo === 'sistema' && evento.mensagem}

@@ -11,7 +11,7 @@ function App() {
   const [experimentoAtivo, setExperimentoAtivo] = useState(null);
 
   return (
-    <div className="w-screen h-screen bg-slate-950">
+    <div className="w-screen h-screen bg-slate-950 overflow-auto">
       <Header/>
       <nav className='p-8'>
         <button className='bg-lime-600 p-3 cursor-pointer hover:bg-lime-400 transition duration-400 rounded-2xl text-white font-bold font-sora' onClick={() => setExperimentoAtivo(null)}>Menu Principal</button>
