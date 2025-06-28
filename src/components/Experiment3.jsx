@@ -56,34 +56,36 @@ const Experimento3 = () => {
   };
 
   return (
-    <div className="experimento3">
-      <h2>Experimento 3: 200 Threads (100 Produtores / 100 Consumidores) com Semáforos</h2>
+    <div className="text-white font-sora">
+      <h2 className='text-center'>Experimento 3: 200 Threads (100 Produtores / 100 Consumidores) com Semáforos</h2>
       
-      <div className="controls">
-        <button onClick={iniciar} disabled={loading}>
-          {loading ? 'Executando...' : 'Iniciar Experimento'}
-        </button>
-      </div>
       
-      <div className="buffer-container">
+      
+      <div className="flex flex-col justify-center items-center">
         <h3>Buffer Compartilhado (Tamanho: 10)</h3>
-        <div className="buffer-grid">
+        <div className="grid grid-cols-5 gap-10">
           {buffer.map((item, index) => (
-            <div key={index} className="buffer-cell">
+            <div key={index} className="flex justify-center items-center h-10 text-2xl border-2 border-blue-600 p-8 font-bold bg-gray-800 rounded-2xl ">
               {item !== null && item !== 0 ? item : '∅'}
             </div>
           ))}
         </div>
       </div>
+
+      <div className='flex justify-center items-center'>
+        <button className="bg-lime-500 font-sora rounded-2xl w-50 pt-2 pb-2 cursor-pointer" onClick={iniciar} disabled={loading}>
+          {loading ? 'Executando...' : 'Iniciar Experimento'}
+        </button>
+      </div>
       
-      <div className="counters">
-        <div className="counter">
-          <span className="label">Produzidos:</span>
-          <span className="value">{counters.produzidos}</span>
+      <div className="flex justify-center gap-6 mt-10">
+        <div className="text-center bg-blue-700 p-3 rounded-2xl">
+          <span className="block text-2xl text-green-500">Produzidos:</span>
+          <span className="block text-lg font-bold">{counters.produzidos}</span>
         </div>
-        <div className="counter">
-          <span className="label">Consumidos:</span>
-          <span className="value">{counters.consumidos}</span>
+        <div className="text-center bg-blue-700 p-3 rounded-2xl">
+          <span className="block text-2xl text-red-500">Consumidos:</span>
+          <span className="block text-lg font-bold">{counters.consumidos}</span>
         </div>
       </div>
       

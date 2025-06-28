@@ -47,8 +47,8 @@ const ProdCons = () => {
   };
 
   return (
-    <div className="prod-cons">
-      <h2>Produtores e Consumidores</h2>
+    <div className="text-white">
+      <h2 className=''>Produtores e Consumidores</h2>
       
       <div className="controls">
         <button onClick={iniciar} disabled={loading}>
