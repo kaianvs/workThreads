@@ -4,10 +4,14 @@ import { parentPort, workerData } from 'worker_threads';
 const { id } = workerData;
 
 // Enviar mensagem de alô imediatamente
-parentPort.postMessage({ 
+setTimeout(()=>{
+  parentPort.postMessage({ 
   id, 
   text: `Alô do filho ${id} (Thread)` 
 });
+}, 2000);
+
+
 
 
 // Simular processamento

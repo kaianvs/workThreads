@@ -64,8 +64,6 @@ function iniciarExp1(numThreads) {
     });
     
     worker.on('exit', () => {
-      threadsFinalizados++;
-      
       // Verificar se todos os threads terminaram
       if (threadsFinalizados === numThreads) {
         exp1Eventos.push({ 
@@ -81,7 +79,7 @@ function iniciarExp1(numThreads) {
 
   // Timeout de segurança
   setTimeout(() => {
-    if (threadsFinalizados <= numThreads) {
+    if (threadsFinalizados < numThreads) {
       workers.forEach(worker => worker.terminate());
       exp1Eventos.push({ 
         tipo: 'pai', 
@@ -89,7 +87,7 @@ function iniciarExp1(numThreads) {
         timestamp: new Date() 
       });
     }
-  }, 6000); // 6 segundos para garantir
+  }, 7000); // 6 segundos para garantir
 }
 // ============== ROTAS PARA EXPERIMENTO 2 ==============
 app.get('/exp2/eventos', (req, res) => {
